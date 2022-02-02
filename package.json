@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack serve"
+  },
+  "license": "Custom",
+  "private": true,
+  "main": "./src/index.js",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^10.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0",
+    "webpack-stream": "^7.0.0"
+  },
+  "dependencies": {
+    "@arction/lcjs": "^3.4.0",
+    "@arction/xydata": "^1.4.0"
+  },
+  "lightningChart": {
+    "eID": "0052"
+  }
+}
