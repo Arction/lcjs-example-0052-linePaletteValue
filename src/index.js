@@ -18,7 +18,7 @@ const {
 
 const chart = lightningChart()
     .ChartXY({
-        // theme: Themes.darkGold
+        theme: Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined,
     })
     .setTitle('Loading example data ...')
     .setAutoCursor((cursor) => cursor.setTickMarkerXVisible(false).setTickMarkerYVisible(false))
