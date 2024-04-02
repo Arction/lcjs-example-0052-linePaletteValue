@@ -85,7 +85,9 @@ const displayDataSource = async (sourceName) => {
     let data = dataSource.data
     if (!data) {
         console.time(`Load data set ${sourceName}`)
-        data = await fetch(document.head.baseURI + `examples/assets/0052/${dataSource.file}`).then((r) => r.json())
+        data = await fetch(
+            new URL(document.head.baseURI).origin + new URL(document.head.baseURI).pathname + `examples/assets/0052/${dataSource.file}`,
+        ).then((r) => r.json())
         dataSource.data = data
         console.timeEnd(`Load data set ${sourceName}`)
     }
