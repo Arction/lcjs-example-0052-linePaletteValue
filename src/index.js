@@ -2,7 +2,7 @@
  * Example showcasing Line Series feature for coloring line dynamically based on separate Value data set
  */
 
-const lcjs = require('@arction/lcjs')
+const lcjs = require('@lightningchart/lcjs')
 const {
     lightningChart,
     UIElementBuilders,
@@ -23,18 +23,14 @@ const chart = lightningChart({
         theme: Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined,
     })
     .setTitle('Loading example data ...')
-    .setAutoCursor((cursor) => cursor.setTickMarkerXVisible(false).setTickMarkerYVisible(false))
+    .setCursor((cursor) => cursor.setTickMarkerXVisible(false).setTickMarkerYVisible(false))
 
 const theme = chart.getTheme()
 const axisX = chart.getDefaultAxisX()
 const axisY = chart.getDefaultAxisY()
 chart.getDefaultAxes().forEach((axis) => axis.setTickStrategy(AxisTickStrategies.Empty).setStrokeStyle(emptyLine))
 
-const lineSeries = chart
-    .addLineSeries({ individualLookupValuesEnabled: true })
-    .setCursorSolveBasis('nearest')
-    .setCursorInterpolationEnabled(false)
-    .setStrokeStyle((stroke) => stroke.setThickness(10))
+const lineSeries = chart.addLineSeries({ individualLookupValuesEnabled: true }).setStrokeStyle((stroke) => stroke.setThickness(10))
 
 const labelStart = chart.addUIElement(UIElementBuilders.TextBox, { x: axisX, y: axisY }).setVisible(false)
 
@@ -99,9 +95,6 @@ const displayDataSource = async (sourceName) => {
         .setName(sourceName)
         .add(data)
         .setStrokeStyle((stroke) => stroke.setFillStyle(new PalettedFill({ lut: dataSource.lut })))
-        .setCursorResultTableFormatter((builder, _, __, ___, dataPoint) =>
-            builder.addRow(sourceName).addRow(dataPoint.value ? dataSource.format(dataPoint.value) : ''),
-        )
 
     const start = data[0]
     labelStart.setVisible(true).setPosition(start).setOrigin(UIOrigins.CenterBottom).setMargin(10).setText('START')
